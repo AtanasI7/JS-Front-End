@@ -3,8 +3,7 @@ function strOccur(text, searchedWord) {
 
     let occurances = newArr.filter(word => word === searchedWord);
 
-    console.log(occurances.length);
-    
+    console.log(occurances.length);   
 }
 
 strOccur('This is a word and it also is a sentence', 'is');
