@@ -3,9 +3,6 @@ function factorialDivision(num1, num2) {
     let secondResult = getFactorial(num2);
 
     console.log((firstResult / secondResult).toFixed(2));
-    
-
-
 
     function getFactorial(num) {
         let result = 1;
