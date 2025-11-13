@@ -12,12 +12,7 @@ function addressBook(arr) {
         // let [name, address] = entry;
         
         console.log(`${name} -> ${address}`);
-        
-        
-        
     }
-    
-
 }
 
 addressBook([
