@@ -5,44 +5,32 @@ function solve(input) {
         /^(?<name>.+) onDate (?<date>.+)$/
     ];
 
-    let moviesArr = [];
+    const movies = {};
 
-    for (const movieInfo of input) {
+    for (const command of input) {
+        let match;
+        if ((match = command.match(patterns[0])) != null) {
+            const name = match.groups["name"];
 
-        if (patterns[0].test(movieInfo)) {
-            const match = movieInfo.match(patterns[0]);
-            const name = match.groups["name"]
-            let movieObj = {
-                name: name
-            }
-
-            moviesArr.push(movieObj);
-        }
-        else if (patterns[1].test(movieInfo)) {
-            const match = movieInfo.match(patterns[1]);
+            movies[name] = { name }
+        } else if ((match = command.match(patterns[1])) != null) {
             const name = match.groups["name"];
             const director = match.groups["director"];
 
-            for (let movie of moviesArr) {
-                if (name === movie["name"]) {
-                    movie["director"] = director;
-                }
+            if (movies.hasOwnProperty(name)) {
+                movies[name].director = director;
             }
-        }
-        else if (patterns[2].test(movieInfo)) {
-            const match = movieInfo.match(patterns[2]);
+        } else if ((match = command.match(patterns[2])) != null) {
             const name = match.groups["name"];
             const date = match.groups["date"];
 
-            for (let movie of moviesArr) {
-                if (name === movie["name"]) {
-                    movie["date"] = date;
-                }
+            if (movies.hasOwnProperty(name)) {
+                movies[name].date = date;
             }
         }
     }
 
-    for (let movie of moviesArr) {
+    for (const movie of Object.values(movies)) {
         if (("director" in movie) && ("date" in movie)) {
             console.log(JSON.stringify(movie));
         }
